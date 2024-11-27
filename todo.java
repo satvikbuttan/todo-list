@@ -11,7 +11,8 @@ public class TodoList {
         System.out.println("1. View tasks");
         System.out.println("2. Add a task");
         System.out.println("3. Remove a task");
-        System.out.println("4. Exit");
+        System.out.println("4. Search tasks");
+        System.out.println("5. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -43,6 +44,23 @@ public class TodoList {
         }
     }
 
+    // New function to search tasks
+    public static void searchTasks(String keyword) {
+        System.out.println("Search results for \"" + keyword + "\":");
+        boolean found = false;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No tasks matched the keyword.");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -67,6 +85,11 @@ public class TodoList {
                     removeTask(taskNumber);
                     break;
                 case 4:
+                    System.out.print("Enter the keyword to search: ");
+                    String keyword = scanner.nextLine();
+                    searchTasks(keyword);
+                    break;
+                case 5:
                     running = false;
                     System.out.println("Exiting To-Do List. Goodbye!");
                     break;
